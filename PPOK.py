@@ -118,7 +118,7 @@ symptom_names = {
     'G04': 'Sesak saat aktivitas berat',
     'G05': 'Sesak saat naik tangga',
     'G06': 'Berjalan lambat karena sesak',
-    'G07': 'Sesak saat berjalan 100m',
+    'G07': 'Sesak saat berjalan 100 meter',
     'G08': 'Sesak saat mandi/pakai baju',
     'G09': 'Nyeri di dada',
     'G10': 'Mengi (suara tinggi saat napas)',
