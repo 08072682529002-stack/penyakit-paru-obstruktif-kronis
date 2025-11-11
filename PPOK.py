@@ -234,7 +234,7 @@ if menu == "🏠 Dashboard":
     st.markdown("### Fitur Utama:")
     st.markdown("""
     - Form input pengguna & gejala interaktif  
-    - Proses diagnosis otomatis menggunakan teori bukti  
+    - Proses diagnosis otomatis 
     - Tingkat keyakinan hasil ditampilkan dalam persentase  
     - Saran kesehatan dan pencegahan
     """)
