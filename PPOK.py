@@ -209,7 +209,7 @@ if menu == "🏠 Dashboard":
     )
 
     st.markdown("---")
-    st.markdown("<div style='margin-top:14px;'>💚 Klik menu <strong>Diagnosis PPOK</strong> di sidebar untuk memulai pemeriksaan.</div>", unsafe_allow_html=True)
+    st.markdown("<div style='margin-top:14px;'>Klik menu <strong>Diagnosis PPOK</strong> di sidebar untuk memulai pemeriksaan.</div>", unsafe_allow_html=True)
 
 elif menu == "🩺 Diagnosis PPOK":
     st.markdown('<div class="main-title">Form Diagnosis PPOK</div>', unsafe_allow_html=True)
