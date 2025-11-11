@@ -207,16 +207,11 @@ if menu == "🏠 Dashboard":
         """,
         unsafe_allow_html=True,
     )
-
-   st.markdown("---")
-st.markdown("### 🫁 Apa itu PPOK?")
-st.markdown("""
-Penyakit Paru Obstruktif Kronis (PPOK) adalah penyakit paru jangka panjang yang menyebabkan
-hambatan aliran udara dan kesulitan bernapas. PPOK biasanya disebabkan oleh **merokok**, polusi udara,
-atau paparan bahan kimia berbahaya dalam waktu lama.  
-Penyakit ini bersifat **kronis dan progresif**, sehingga deteksi dini sangat penting untuk mencegah
-kerusakan paru yang lebih parah.
-""")
+    st.markdown("---")
+    st.markdown("### 🫁 Apa itu PPOK?")
+    st.markdown("""
+        Penyakit Paru Obstruktif Kronis (PPOK) adalah penyakit paru jangka panjang yang menyebabkan hambatan aliran udara dan kesulitan bernapas. PPOK biasanya disebabkan oleh **merokok**, polusi udara, atau paparan bahan kimia berbahaya dalam waktu lama. Penyakit ini bersifat **kronis dan progresif**, sehingga deteksi dini sangat penting untuk mencegah kerusakan paru yang lebih parah.
+    """)
 
 # Tips pencegahan
 st.markdown("### 💡 Tips Pencegahan:")
