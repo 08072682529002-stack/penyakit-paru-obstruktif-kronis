@@ -7,74 +7,57 @@ from datetime import datetime
 # Page Configuration
 st.set_page_config(page_title="Sistem Pakar PPOK", page_icon="🫁", layout="wide")
 
-# Sidebar
-st.markdown("""
-<style>
-/* Sidebar area */
-[data-testid="stSidebar"] {
-    background-color: #e8f5f2; /* warna hijau lembut */
-    padding: 2rem 1.5rem;
-    width: 270px !important;
-}
+# Path gambar header
+header_image = "f6cabea2-146a-4560-ac1c-ed9ac8ea18f0.png"
 
-/* Logo dan judul */
-.sidebar-title {
-    text-align: center;
-    font-weight: 700;
-    font-size: 18px;
-    color: #0f5132;
-    margin-top: 0.5rem;
-    margin-bottom: 1rem;
-}
+# CSS untuk membuat header transparan & elegan
+st.markdown(f"""
+    <style>
+    .header-container {{
+        position: relative;
+        background-image: url("{header_image}");
+        background-size: cover;
+        background-position: center;
+        border-radius: 15px;
+        padding: 60px 30px;
+        text-align: center;
+        color: white;
+        font-family: 'Segoe UI', sans-serif;
+        box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
+        margin-bottom: 30px;
+    }}
+    .header-overlay {{
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        background-color: rgba(0, 0, 0, 0.45); /* transparansi */
+        border-radius: 15px;
+        z-index: 1;
+    }}
+    .header-content {{
+        position: relative;
+        z-index: 2;
+    }}
+    .header-content h1 {{
+        font-size: 2.2em;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }}
+    .header-content p {{
+        font-size: 1.1em;
+        margin-top: 0;
+    }}
+    </style>
 
-.sidebar-logo {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
-    background: radial-gradient(circle, #8fd3c8 0%, #4ca98a 100%);
-}
-
-/* Navigasi radio button */
-[data-testid="stSidebar"] [role="radiogroup"] {
-    margin-top: 1rem;
-}
-
-[data-testid="stSidebar"] label {
-    font-size: 15px;
-    font-weight: 500;
-    color: #084c61;
-    padding: 6px 10px;
-    border-radius: 10px;
-    margin-bottom: 6px;
-    transition: all 0.2s ease-in-out;
-}
-
-[data-testid="stSidebar"] label:hover {
-    background-color: #d9f0ea;
-    color: #05668d;
-    transform: translateX(5px);
-}
-
-[data-testid="stSidebar"] div[role="radiogroup"] > label[data-baseweb="radio"]:has(input:checked) {
-    background-color: #b5e5d6 !important;
-    font-weight: 600 !important;
-    color: #063c32 !important;
-}
-
-/* Footer text */
-.sidebar-footer {
-    font-size: 12px;
-    color: #49796b;
-    text-align: center;
-    margin-top: 2rem;
-    border-top: 1px solid #aac7b4;
-    padding-top: 1rem;
-}
-</style>
+    <div class="header-container">
+        <div class="header-overlay"></div>
+        <div class="header-content">
+            <h1>Selamat Datang di Sistem Pakar Diagnosis PPOK</h1>
+            <p>Mendeteksi Penyakit Paru Obstruktif Kronis secara cepat dan cerdas</p>
+        </div>
+    </div>
 """, unsafe_allow_html=True)
+
 
 # Sidebar
 with st.sidebar:
