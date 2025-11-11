@@ -195,7 +195,7 @@ if menu == "🏠 Dashboard":
     st.markdown('<div class="main-title">Selamat Datang di Sistem Pakar Diagnosis PPOK</div>', unsafe_allow_html=True)
     st.markdown('<div class="sub-text">Sistem ini membantu mendiagnosis <b>Penyakit Paru Obstruktif Kronis (PPOK)</b> berdasarkan gejala pengguna menggunakan metode <b>Dempster-Shafer</b>.</div>', unsafe_allow_html=True)
 
-    st.markdown('<h4>✨ Fitur Utama:</h4>', unsafe_allow_html=True)
+    st.markdown('<h4>💡 Fitur Utama:</h4>', unsafe_allow_html=True)
     st.markdown(
         """
         <ul class="feature-list">
