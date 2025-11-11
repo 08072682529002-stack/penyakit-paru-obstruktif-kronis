@@ -234,16 +234,6 @@ if menu == "🏠 Dashboard":
         st.success("Silakan klik menu '🩺 Diagnosis PPOK' di sidebar untuk melanjutkan diagnosis.")
 
 elif menu == "🩺 Diagnosis PPOK":
-    st.markdown("## 🩺 Halaman Diagnosis PPOK")
-    st.write("Form diagnosis akan ditampilkan di sini...")
-
-elif menu == "ℹ️ Tentang Aplikasi":
-    st.markdown("## ℹ️ Tentang Aplikasi")
-    st.write("Aplikasi ini dibuat untuk membantu pengguna mendiagnosis PPOK secara dini.")
-
-
-
-elif menu == "🩺 Diagnosis PPOK":
     st.markdown('<div class="main-title">Form Diagnosis PPOK</div>', unsafe_allow_html=True)
     st.markdown('<div class="sub-text">Isi data lalu pilih minimal 3 gejala untuk melakukan proses diagnosis.</div>', unsafe_allow_html=True)
 
