@@ -72,6 +72,74 @@ st.markdown("""
     </div>
 """, unsafe_allow_html=True)
 
+st.markdown("""
+<style>
+/* Sidebar area */
+[data-testid="stSidebar"] {
+    background-color: #e8f5f2; /* warna hijau lembut */
+    padding: 2rem 1.5rem;
+    width: 270px !important;
+}
+
+/* Logo dan judul */
+.sidebar-title {
+    text-align: center;
+    font-weight: 700;
+    font-size: 18px;
+    color: #0f5132;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.sidebar-logo {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #8fd3c8 0%, #4ca98a 100%);
+}
+
+/* Navigasi radio button */
+[data-testid="stSidebar"] [role="radiogroup"] {
+    margin-top: 1rem;
+}
+
+[data-testid="stSidebar"] label {
+    font-size: 15px;
+    font-weight: 500;
+    color: #084c61;
+    padding: 6px 10px;
+    border-radius: 10px;
+    margin-bottom: 6px;
+    transition: all 0.2s ease-in-out;
+}
+
+[data-testid="stSidebar"] label:hover {
+    background-color: #d9f0ea;
+    color: #05668d;
+    transform: translateX(5px);
+}
+
+[data-testid="stSidebar"] div[role="radiogroup"] > label[data-baseweb="radio"]:has(input:checked) {
+    background-color: #b5e5d6 !important;
+    font-weight: 600 !important;
+    color: #063c32 !important;
+}
+
+/* Footer text */
+.sidebar-footer {
+    font-size: 12px;
+    color: #49796b;
+    text-align: center;
+    margin-top: 2rem;
+    border-top: 1px solid #aac7b4;
+    padding-top: 1rem;
+}
+</style>
+""", unsafe_allow_html=True)
+
 
 # Sidebar
 with st.sidebar:
