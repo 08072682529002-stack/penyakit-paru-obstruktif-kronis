@@ -286,5 +286,5 @@ elif menu == "ℹ️ Tentang Aplikasi":
         menggantikan diagnosis langsung dari tenaga medis profesional.
         """
     )
-    st.markdown("**Dibangun dengan**: Python & Streamlit" oleh Rahma Yuliana)
+    st.markdown("**Dibangun dengan**: Python & Streamlit oleh Rahma Yuliana")
 
