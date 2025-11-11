@@ -278,7 +278,7 @@ elif menu == "🩺 Diagnosis PPOK":
                 )
 
 elif menu == "ℹ️ Tentang Aplikasi":
-    st.markdown('<div class="main-title">### Tentang Sistem Pakar PPOK</div>', unsafe_allow_html=True)
+    st.markdown('<div class="main-title">## Tentang Sistem Pakar PPOK</div>', unsafe_allow_html=True)
     st.markdown(
         """
         Aplikasi ini dirancang untuk membantu deteksi dini Penyakit Paru Obstruktif Kronis (PPOK)
