@@ -8,117 +8,86 @@ from datetime import datetime
 st.set_page_config(page_title="Sistem Pakar PPOK", page_icon="🫁", layout="wide")
 
 # Sidebar
-st.markdown(
-    """
-    <style>
-    /* Body */
-    body { background-color: #f7fbfb; color: #00343a; font-family: "Inter", "Poppins", sans-serif; }
+st.markdown("""
+<style>
+/* Sidebar area */
+[data-testid="stSidebar"] {
+    background-color: #e8f5f2; /* warna hijau lembut */
+    padding: 2rem 1.5rem;
+    width: 270px !important;
+}
 
-    /* Perlebar sidebar dan beri padding */
-    [data-testid="stSidebar"] {
-        width: 300px !important;
-        background-color: #e8f6f3;
-        padding-top: 28px;
-        padding-left: 26px;
-        padding-right: 26px;
-    }
+/* Logo dan judul */
+.sidebar-title {
+    text-align: center;
+    font-weight: 700;
+    font-size: 18px;
+    color: #0f5132;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+}
 
-    /* Icon/user avatar area */
-    .sidebar-avatar {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        margin-bottom: 18px;
-    }
-    .avatar-circle {
-        width: 64px;
-        height: 64px;
-        border-radius: 50%;
-        background: linear-gradient(135deg, #9be7d0, #6cc1a5);
-        display: inline-block;
-    }
-    .sidebar-title { font-weight: 700; color: #0a5957; margin: 0; font-size: 16px; line-height: 1.1; }
+.sidebar-logo {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #8fd3c8 0%, #4ca98a 100%);
+}
 
-    /* Sidebar links spacing */
-    .sidebar-links a {
-        display: block;
-        padding: 10px 6px;
-        margin-bottom: 6px;
-        border-radius: 8px;
-        color: #054b49;
-        text-decoration: none;
-        font-size: 15px;
-    }
-    .sidebar-links a:hover {
-        background-color: rgba(5,75,73,0.06);
-        color: #023a39;
-    }
+/* Navigasi radio button */
+[data-testid="stSidebar"] [role="radiogroup"] {
+    margin-top: 1rem;
+}
 
-    /* Main headings */
-    .main-title { color: #006e6a; font-size: 32px; font-weight: 700; margin-bottom: 6px; }
-    .sub-text { color: #2b4d4b; font-size: 15px; margin-bottom: 20px; }
+[data-testid="stSidebar"] label {
+    font-size: 15px;
+    font-weight: 500;
+    color: #084c61;
+    padding: 6px 10px;
+    border-radius: 10px;
+    margin-bottom: 6px;
+    transition: all 0.2s ease-in-out;
+}
 
-    /* Feature list */
-    .feature-list { margin-left: 18px; line-height: 1.8; font-size: 15px; }
+[data-testid="stSidebar"] label:hover {
+    background-color: #d9f0ea;
+    color: #05668d;
+    transform: translateX(5px);
+}
 
-    /* Card style for diagnosis results */
-    .result-card {
-        background-color: #ffffff;
-        border-radius: 12px;
-        padding: 16px;
-        box-shadow: 0 4px 10px rgba(3, 22, 18, 0.03);
-        margin-top: 12px;
-    }
+[data-testid="stSidebar"] div[role="radiogroup"] > label[data-baseweb="radio"]:has(input:checked) {
+    background-color: #b5e5d6 !important;
+    font-weight: 600 !important;
+    color: #063c32 !important;
+}
 
-    /* Make checkbox label spacing nicer */
-    .stCheckbox label { line-height: 1.6; font-size: 15px; }
-
-    /* Button style */
-    div.stButton > button {
-        background-color: #68c4af;
-        color: white;
-        border-radius: 10px;
-        height: 40px;
-        font-weight: 600;
-    }
-    div.stButton > button:hover {
-        background-color: #4aa58f;
-    }
-
-    /* Small responsive fix */
-    @media (max-width: 768px) {
-        [data-testid="stSidebar"] { width: 100% !important; }
-    }
-    </style>
-    """,
-    unsafe_allow_html=True,
-)
+/* Footer text */
+.sidebar-footer {
+    font-size: 12px;
+    color: #49796b;
+    text-align: center;
+    margin-top: 2rem;
+    border-top: 1px solid #aac7b4;
+    padding-top: 1rem;
+}
+</style>
+""", unsafe_allow_html=True)
 
 # Sidebar
 with st.sidebar:
-    st.markdown(
-        """
-        <div class="sidebar-avatar">
-            <div class="avatar-circle"></div>
-            <div>
-                <p class="sidebar-title">🫁 Sistem Pakar<br>Penyakit Paru Obstruktif Kronis</p>
-            </div>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
-
-    st.markdown("---")
-
-    # Use a radio for menu selection but show nicer links in HTML for spacing
-    menu = st.radio(
-        "Navigasi",
-        ("🏠 Dashboard", "🩺 Diagnosis PPOK", "ℹ️ Tentang Aplikasi"),
-        index=0,
-    )
-
-    st.markdown("---")
-    st.caption("© 2025 Sistem Pakar PPOK | by Rahma Yuliana")
+    st.markdown('<div class="sidebar-logo"></div>', unsafe_allow_html=True)
+    st.markdown('<div class="sidebar-title">🫁 Sistem Pakar<br>Penyakit Paru Obstruktif Kronis</div>', unsafe_allow_html=True)
+    
+    menu = st.radio("Navigasi", ["🏠 Dashboard", "🩺 Diagnosis PPOK", "ℹ️ Tentang Aplikasi"])
+    
+    st.markdown("""
+    <div class="sidebar-footer">
+    © 2025 Sistem Pakar PPOK | <br>by <b>Rahma Yuliana</b>
+    </div>
+    """, unsafe_allow_html=True)
 
 # ---------------- Knowledge base (unchanged) ----------------
 knowledge_base = {
