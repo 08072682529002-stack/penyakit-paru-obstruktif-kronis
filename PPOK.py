@@ -290,8 +290,8 @@ elif menu == "ℹ️ Tentang Aplikasi":
     st.markdown('<div class="main-title">Tentang Sistem Pakar PPOK</div>', unsafe_allow_html=True)
     st.markdown(
         """
-        Aplikasi ini dirancang untuk membantu deteksi dini <b>Penyakit Paru Obstruktif Kronis (PPOK)</b>
-        menggunakan metode <b>Dempster-Shafer</b>. Hasil yang ditampilkan adalah indikatif dan tidak
+        Aplikasi ini dirancang untuk membantu deteksi dini Penyakit Paru Obstruktif Kronis (PPOK)
+        menggunakan metode Dempster-Shafer. Hasil yang ditampilkan adalah indikatif dan tidak
         menggantikan diagnosis langsung dari tenaga medis profesional.
         """
     )
