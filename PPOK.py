@@ -118,7 +118,7 @@ with st.sidebar:
     )
 
     st.markdown("---")
-    st.caption("© 2025 Sistem Pakar PPOK\nby Rahma Yuliana")
+    st.caption("© 2025 Sistem Pakar PPOK | by Rahma Yuliana")
 
 # ---------------- Knowledge base (unchanged) ----------------
 knowledge_base = {
@@ -192,7 +192,7 @@ def combine_mass(m1, m2):
 
 # ---------------- Pages ----------------
 if menu == "🏠 Dashboard":
-    st.markdown('<div class="main-title">Selamat Datang di Sistem Pakar Diagnosis PPOK</div>', unsafe_allow_html=True)
+    st.markdown('<div class="main-title">Selamat Datang di Sistem Pakar Diagnosis Penyakit Paru Obstruktif Kronis</div>', unsafe_allow_html=True)
     st.markdown('<div class="sub-text">Sistem ini membantu mendiagnosis <b>Penyakit Paru Obstruktif Kronis (PPOK)</b> berdasarkan gejala pengguna menggunakan metode <b>Dempster-Shafer</b>.</div>', unsafe_allow_html=True)
 
     st.markdown('### 💡 Fitur Utama:</h4>', unsafe_allow_html=True)
