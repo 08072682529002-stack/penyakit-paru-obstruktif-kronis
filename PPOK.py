@@ -103,7 +103,7 @@ st.markdown("""
 
 <div class='header-banner'>
     <h2>🫁 Sistem Pakar Diagnosis PPOK</h2>
-    <p>Berbasis Dempster-Shafer • Akurat • Informatif</p>
+    <p>Akurat • Informatif</p>
 </div>
 """, unsafe_allow_html=True)
 
