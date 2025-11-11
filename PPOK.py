@@ -85,7 +85,7 @@ with st.sidebar:
     
     st.markdown("""
     <div class="sidebar-footer">
-    © 2025 Sistem Pakar PPOK | <br>by <b>Rahma Yuliana</b>
+    © 2025 Sistem Pakar PPOK <br>by <b>Rahma Yuliana</b>
     </div>
     """, unsafe_allow_html=True)
 
@@ -278,7 +278,7 @@ elif menu == "🩺 Diagnosis PPOK":
                 )
 
 elif menu == "ℹ️ Tentang Aplikasi":
-    st.markdown('<div class="main-title">Tentang Sistem Pakar PPOK</div>', unsafe_allow_html=True)
+    st.markdown('<div class="main-title">### Tentang Sistem Pakar PPOK</div>', unsafe_allow_html=True)
     st.markdown(
         """
         Aplikasi ini dirancang untuk membantu deteksi dini Penyakit Paru Obstruktif Kronis (PPOK)
@@ -286,5 +286,5 @@ elif menu == "ℹ️ Tentang Aplikasi":
         menggantikan diagnosis langsung dari tenaga medis profesional.
         """
     )
-    st.markdown("**Dibangun dengan**: Python & Streamlit")
+    st.markdown("**Dibangun dengan**: Python & Streamlit" oleh Rahma Yuliana)
 
