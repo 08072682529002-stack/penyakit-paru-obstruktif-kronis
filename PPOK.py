@@ -234,10 +234,10 @@ elif menu == "🩺 Diagnosis PPOK":
     with col_right:
         umur = st.number_input("Umur", min_value=0, max_value=120, step=1)
         st.markdown("### Info Singkat")
-        st.markdown("- Minimal 3 gejala untuk proses valid")
+        st.markdown("- Minimal tiga gejala untuk proses valid")
         st.markdown("- Hasil bersifat indikatif, bukan diagnosis dokter")
 
-    if st.button("💚 Proses Diagnosis"):
+    if st.button("Proses Diagnosis"):
         selected_symptoms_list = [code for code, sel in selected_symptoms_map.items() if sel]
 
         if not nama or umur == 0:
@@ -296,4 +296,4 @@ elif menu == "ℹ️ Tentang Aplikasi":
         """
     )
     st.markdown("**Dibangun dengan**: Python & Streamlit")
-    st.markdown("**Versi**: 2.0 — Tema Pastel & Sidebar Lebar")
+
