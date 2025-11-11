@@ -4,98 +4,90 @@
 import streamlit as st
 from datetime import datetime
 
-# ===================== KONFIGURASI HALAMAN =====================
+import streamlit as st
+
+# --- Konfigurasi Halaman ---
 st.set_page_config(
-    page_title="🫁 Sistem Pakar PPOK",
+    page_title="Sistem Pakar Diagnosis PPOK",
     page_icon="🫁",
     layout="wide"
 )
 
-# ===================== CSS KHUSUS (TEMA PASTEL) =====================
 st.markdown("""
-<style>
-/* Background dan warna utama */
-body {
-    background-color: #f4f9f9;
-    font-family: 'Poppins', sans-serif;
-    color: #003366;
-}
+    <style>
+    /* Sidebar Styling */
+    [data-testid="stSidebar"] {
+        background-color: #E8F6F3;
+        padding: 30px 20px;
+        width: 280px !important;
+    }
 
-/* Sidebar */
-[data-testid="stSidebar"] {
-    background-color: #e0f7f4 !important;
-    color: #004c4c;
-}
-[data-testid="stSidebar"] h1, [data-testid="stSidebar"] h2 {
-    color: #005f5f;
-}
+    [data-testid="stSidebar"] h1, 
+    [data-testid="stSidebar"] h2, 
+    [data-testid="stSidebar"] h3 {
+        text-align: center;
+        color: #2F4F4F;
+    }
 
-/* Tombol */
-div.stButton > button:first-child {
-    background-color: #68c4af;
-    color: white;
-    border-radius: 12px;
-    border: none;
-    height: 3em;
-    width: 100%;
-    font-size: 1em;
-    transition: 0.3s;
-}
-div.stButton > button:first-child:hover {
-    background-color: #47a690;
-    transform: scale(1.03);
-}
+    .sidebar-content {
+        margin-top: 30px;
+        line-height: 2;
+        font-size: 16px;
+    }
 
-/* Kotak hasil diagnosis */
-.stSuccess, .stInfo, .stWarning {
-    border-radius: 12px;
-    padding: 15px;
-}
+    /* Konten Utama */
+    .main-title {
+        color: #006666;
+        font-size: 28px;
+        font-weight: bold;
+    }
 
-/* Metric styling */
-[data-testid="stMetric"] {
-    background-color: #f0faf9;
-    border-radius: 12px;
-    padding: 10px;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
-}
+    .sub-title {
+        color: #333;
+        font-size: 18px;
+    }
 
-/* Heading */
-h2, h3, h4 {
-    color: #007b83;
-}
-</style>
+    .feature-list {
+        margin-left: 30px;
+        font-size: 16px;
+        line-height: 1.8;
+    }
+
+    </style>
 """, unsafe_allow_html=True)
 
-# ===================== SIDEBAR NAVIGASI =====================
-st.sidebar.image("https://cdn-icons-png.flaticon.com/512/3177/3177440.png", width=100)
-st.sidebar.title("🫁 Sistem Pakar Penyakit Paru Obstruktif Kronis")
-st.sidebar.markdown("---")
-
-menu = st.sidebar.radio(
-    "Navigasi",
-    ["🏠 Dashboard", "🩺 Diagnosis PPOK", "ℹ️ Tentang Aplikasi"]
-)
-
-st.sidebar.markdown("---")
+# --- Sidebar ---
+st.sidebar.markdown("## 🫁 Sistem Pakar Diagnosis Penyakit Paru Obstruktif Kronis")
+st.sidebar.divider()
+st.sidebar.markdown("""
+<div class="sidebar-content">
+    <a href="#">🏠 Dashboard</a><br>
+    <a href="#">🧪 Diagnosis PPOK</a><br>
+    <a href="#">ℹ️ Tentang Aplikasi</a>
+</div>
+""", unsafe_allow_html=True)
+st.sidebar.divider()
 st.sidebar.caption("© 2025 Sistem Pakar PPOK | by Rahma Yuliana")
 
-# ===================== HALAMAN DASHBOARD =====================
-if menu == "🏠 Dashboard":
-    st.markdown("<h2 style='color:#007b83;'>Selamat Datang di Sistem Pakar Diagnosis PPOK</h2>", unsafe_allow_html=True)
-    st.markdown("""
-    Sistem ini membantu pengguna mendiagnosis **Penyakit Paru Obstruktif Kronis (PPOK)** 
-    berdasarkan gejala yang dialami menggunakan metode **Dempster-Shafer**.
+# --- Konten Utama ---
+st.markdown("<h1 class='main-title'>Selamat Datang di Sistem Pakar Diagnosis PPOK</h1>", unsafe_allow_html=True)
+st.markdown("""
+Sistem ini membantu pengguna mendiagnosis <b>Penyakit Paru Obstruktif Kronis (PPOK)</b> 
+berdasarkan gejala yang dialami menggunakan metode <b>Dempster-Shafer</b>.
+""", unsafe_allow_html=True)
 
-    ### 💡 Fitur Utama:
-    - Form input pengguna & gejala interaktif  
-    - Proses diagnosis otomatis  
-    - Tingkat keyakinan hasil dalam bentuk persentase  
-    - Saran kesehatan dan pencegahan
+st.markdown("<h3 class='sub-title'>Fitur Utama:</h3>", unsafe_allow_html=True)
+st.markdown("""
+<ul class='feature-list'>
+    <li>Form input pengguna & gejala interaktif</li>
+    <li>Proses diagnosis otomatis</li>
+    <li>Tingkat keyakinan hasil dalam bentuk persentase</li>
+    <li>Saran kesehatan dan pencegahan</li>
+</ul>
+""", unsafe_allow_html=True)
 
-    💚 Klik menu **Diagnosis PPOK** di sebelah kiri untuk memulai pemeriksaan.
-    """)
-    st.image("https://img.freepik.com/free-vector/doctor-examining-patient-with-lung-disease_74855-19635.jpg", use_column_width=True)
+st.markdown("💡 Klik menu <b>Diagnosis PPOK</b> di sebelah kiri untuk memulai pemeriksaan.", unsafe_allow_html=True)
+
 
 # ===================== HALAMAN DIAGNOSIS =====================
 elif menu == "🩺 Diagnosis PPOK":
