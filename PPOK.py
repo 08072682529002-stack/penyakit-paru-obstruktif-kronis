@@ -9,69 +9,7 @@ st.set_page_config(page_title="Sistem Pakar PPOK", page_icon="🫁", layout="wid
 
 import streamlit as st
 
-# --- HEADER GAYA MODERN DENGAN LATAR GAMBAR ---
-st.markdown("""
-    <style>
-    .header-container {
-        position: relative;
-        background-image: url('f6cabea2-146a-4560-ac1c-ed9ac8ea18f0.png');
-        background-size: cover;
-        background-position: center;
-        border-radius: 18px;
-        overflow: hidden;
-        height: 230px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        margin-bottom: 30px;
-        animation: fadeIn 1s ease-in-out;
-    }
-
-    .header-overlay {
-        position: absolute;
-        top: 0; left: 0;
-        width: 100%; height: 100%;
-        background: rgba(0, 40, 30, 0.45);  /* hijau gelap transparan */
-        backdrop-filter: blur(2px);
-        z-index: 1;
-    }
-
-    .header-content {
-        position: relative;
-        z-index: 2;
-        text-align: center;
-        color: #ffffff;
-        padding-top: 60px;
-    }
-
-    .header-content h1 {
-        font-size: 2.2em;
-        font-weight: 800;
-        margin-bottom: 10px;
-        letter-spacing: 1px;
-        text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
-    }
-
-    .header-content p {
-        font-size: 1.05em;
-        font-weight: 400;
-        color: #e6f5ef;
-        margin-top: 0;
-    }
-
-    @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(-15px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
-    </style>
-
-    <div class="header-container">
-        <div class="header-overlay"></div>
-        <div class="header-content">
-            <h1>Selamat Datang di Sistem Pakar Diagnosis PPOK</h1>
-            <p>Diagnosa cerdas berbasis gejala untuk mendeteksi Penyakit Paru Obstruktif Kronis</p>
-        </div>
-    </div>
-""", unsafe_allow_html=True)
-
+# Sidebar
 st.markdown("""
 <style>
 /* Sidebar area */
@@ -226,7 +164,68 @@ def combine_mass(m1, m2):
 
 # ---------------- Pages ----------------
 if menu == "🏠 Dashboard":
-    st.markdown("## Selamat Datang di Sistem Pakar Diagnosis PPOK")
+    st.markdown("""
+    <style>
+    .header-container {
+        position: relative;
+        background-image: url('f6cabea2-146a-4560-ac1c-ed9ac8ea18f0.png');
+        background-size: cover;
+        background-position: center;
+        border-radius: 18px;
+        overflow: hidden;
+        height: 230px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        margin-bottom: 30px;
+        animation: fadeIn 1s ease-in-out;
+    }
+
+    .header-overlay {
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        background: rgba(0, 40, 30, 0.45);  /* hijau gelap transparan */
+        backdrop-filter: blur(2px);
+        z-index: 1;
+    }
+
+    .header-content {
+        position: relative;
+        z-index: 2;
+        text-align: center;
+        color: #ffffff;
+        padding-top: 60px;
+    }
+
+    .header-content h1 {
+        font-size: 2.2em;
+        font-weight: 800;
+        margin-bottom: 10px;
+        letter-spacing: 1px;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+    }
+
+    .header-content p {
+        font-size: 1.05em;
+        font-weight: 400;
+        color: #e6f5ef;
+        margin-top: 0;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-15px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    </style>
+
+    <div class="header-container">
+        <div class="header-overlay"></div>
+        <div class="header-content">
+            <h1>Selamat Datang di Sistem Pakar Diagnosis PPOK</h1>
+            <p>Diagnosa cerdas berbasis gejala untuk mendeteksi Penyakit Paru Obstruktif Kronis</p>
+        </div>
+    </div>
+""", unsafe_allow_html=True)
+
     st.write(
         "Sistem ini membantu mendiagnosis **Penyakit Paru Obstruktif Kronis (PPOK)** "
         "berdasarkan gejala yang dialami pengguna menggunakan metode **Dempster-Shafer**."
