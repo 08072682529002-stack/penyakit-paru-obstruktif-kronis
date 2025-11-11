@@ -87,8 +87,6 @@ st.markdown("""
     align-items: center;
     gap: 1rem;
 '>
-    <img src='https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/SARS-CoV-2_without_background.png/220px-SARS-CoV-2_without_background.png' width='60'>
-    <div>
         <h2 style='margin-bottom: 0;'>🫁 Sistem Pakar Diagnosis PPOK</h2>
         <p style='margin-top: 5px; font-size: 16px; color: #333;'>Akurat • Informatif</p>
     </div>
