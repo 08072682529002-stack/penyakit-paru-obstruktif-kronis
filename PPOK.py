@@ -78,18 +78,35 @@ def combine_mass(m1, m2):
 
 # Header kotak
 st.markdown("""
-<div style='
+<style>
+.header-banner {
+    background-image: url('https://www.shutterstock.com/image-photo/man-patients-respiratory-lung-diseases-600nw-2478601217.jpg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: left center;
     background-color: #e6f2ff;
-    padding: 20px;
+    padding: 20px 20px 20px 100px;
     border-radius: 10px;
     border: 1px solid #d0d0d0;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-'>
-        <h2 style='margin-bottom: 0;'>🫁 Sistem Pakar Diagnosis PPOK</h2>
+}
+.header-banner h2 {
+    margin-bottom: 0;
+    font-size: 24px;
+    color: #003366;
+}
+.header-banner p {
+    margin-top: 5px;
+    font-size: 16px;
+    color: #333;
+}
+</style>
+
+<div class='header-banner'>
+    <h2>🫁 Sistem Pakar Diagnosis PPOK</h2>
+    <p>Berbasis Dempster-Shafer • Akurat • Informatif</p>
 </div>
 """, unsafe_allow_html=True)
+
 
 # Input pengguna
 st.markdown("### 🧑‍⚕️ Data Pengguna")
