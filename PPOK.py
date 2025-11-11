@@ -79,7 +79,7 @@ st.markdown("""
 # Sidebar
 with st.sidebar:
     st.markdown('<div class="sidebar-logo"></div>', unsafe_allow_html=True)
-    st.markdown('<div class="sidebar-title">🫁 Sistem Pakar<br>Penyakit Paru Obstruktif Kronis</div>', unsafe_allow_html=True)
+    st.markdown('<div class="sidebar-title">Sistem Pakar<br>Penyakit Paru Obstruktif Kronis</div>', unsafe_allow_html=True)
     
     menu = st.radio("Navigasi", ["🏠 Dashboard", "🩺 Diagnosis PPOK", "ℹ️ Tentang Aplikasi"])
     
