@@ -88,8 +88,6 @@ st.markdown("""
     gap: 1rem;
 '>
         <h2 style='margin-bottom: 0;'>🫁 Sistem Pakar Diagnosis PPOK</h2>
-        <p style='margin-top: 5px; font-size: 16px; color: #333;'>Akurat • Informatif</p>
-    </div>
 </div>
 """, unsafe_allow_html=True)
 
