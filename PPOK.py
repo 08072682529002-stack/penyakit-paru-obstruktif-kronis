@@ -195,7 +195,7 @@ if menu == "🏠 Dashboard":
     st.markdown('<div class="main-title">Selamat Datang di Sistem Pakar Diagnosis PPOK</div>', unsafe_allow_html=True)
     st.markdown('<div class="sub-text">Sistem ini membantu mendiagnosis <b>Penyakit Paru Obstruktif Kronis (PPOK)</b> berdasarkan gejala pengguna menggunakan metode <b>Dempster-Shafer</b>.</div>', unsafe_allow_html=True)
 
-    st.markdown('<h4>💡 Fitur Utama:</h4>', unsafe_allow_html=True)
+    st.markdown('### 💡 Fitur Utama:</h4>', unsafe_allow_html=True)
     st.markdown(
         """
         <ul class="feature-list">
@@ -208,13 +208,13 @@ if menu == "🏠 Dashboard":
         unsafe_allow_html=True,
     )
     st.markdown("---")
-    st.markdown("### 🫁 Apa itu PPOK?")
+    st.markdown("### Apa itu PPOK?")
     st.markdown("""
         Penyakit Paru Obstruktif Kronis (PPOK) adalah penyakit paru jangka panjang yang menyebabkan hambatan aliran udara dan kesulitan bernapas. PPOK biasanya disebabkan oleh **merokok**, polusi udara, atau paparan bahan kimia berbahaya dalam waktu lama. Penyakit ini bersifat **kronis dan progresif**, sehingga deteksi dini sangat penting untuk mencegah kerusakan paru yang lebih parah.
     """)
 
 # Tips pencegahan
-st.markdown("### 💡 Tips Pencegahan:")
+st.markdown("### Tips Pencegahan:")
 col1, col2, col3 = st.columns(3)
 with col1:
     st.markdown("🚭 **Berhenti Merokok**\n\nLangkah paling efektif mencegah PPOK.")
