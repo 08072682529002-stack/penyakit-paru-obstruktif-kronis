@@ -4,10 +4,10 @@
 import streamlit as st
 from datetime import datetime
 
-# ---------------- Page config ----------------
+# Page Configuration
 st.set_page_config(page_title="Sistem Pakar PPOK", page_icon="🫁", layout="wide")
 
-# ---------------- Custom CSS (pastel + wider sidebar + spacing) ----------------
+# Sidebar
 st.markdown(
     """
     <style>
@@ -94,7 +94,7 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-# ---------------- Sidebar ----------------
+# Sidebar
 with st.sidebar:
     st.markdown(
         """
@@ -208,8 +208,32 @@ if menu == "🏠 Dashboard":
         unsafe_allow_html=True,
     )
 
-    st.markdown("---")
-    st.markdown("<div style='margin-top:14px;'>Klik menu <strong>Diagnosis PPOK</strong> di sidebar untuk memulai pemeriksaan.</div>", unsafe_allow_html=True)
+   st.markdown("---")
+st.markdown("### 🫁 Apa itu PPOK?")
+st.markdown("""
+Penyakit Paru Obstruktif Kronis (PPOK) adalah penyakit paru jangka panjang yang menyebabkan
+hambatan aliran udara dan kesulitan bernapas. PPOK biasanya disebabkan oleh **merokok**, polusi udara,
+atau paparan bahan kimia berbahaya dalam waktu lama.  
+Penyakit ini bersifat **kronis dan progresif**, sehingga deteksi dini sangat penting untuk mencegah
+kerusakan paru yang lebih parah.
+""")
+
+# Tips pencegahan
+st.markdown("### 💡 Tips Pencegahan:")
+col1, col2, col3 = st.columns(3)
+with col1:
+    st.markdown("🚭 **Berhenti Merokok**\n\nLangkah paling efektif mencegah PPOK.")
+with col2:
+    st.markdown("😷 **Hindari Polusi Udara**\n\nGunakan masker di area berasap atau berdebu.")
+with col3:
+    st.markdown("🏃 **Jaga Kesehatan Paru**\n\nLakukan olahraga ringan dan konsumsi makanan bergizi.")
+
+# Tombol langsung ke diagnosis
+st.markdown("---")
+if st.button("🩺 Mulai Diagnosis Sekarang"):
+    st.session_state["menu"] = "🩺 Diagnosis PPOK"
+    st.switch_page("🩺 Diagnosis PPOK")
+
 
 elif menu == "🩺 Diagnosis PPOK":
     st.markdown('<div class="main-title">Form Diagnosis PPOK</div>', unsafe_allow_html=True)
