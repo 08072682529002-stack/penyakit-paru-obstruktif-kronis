@@ -1,3 +1,8 @@
+#!/usr/bin/env python
+# coding: utf-8
+
+# In[36]:
+
 import streamlit as st
 from datetime import datetime
 
@@ -165,5 +170,4 @@ if process_button:
             - Konsumsi makanan bergizi dan cukup istirahat  
             - Lakukan pemeriksaan rutin jika memiliki riwayat pernapasan
             """)
-
-            
+# In[ ]:        
