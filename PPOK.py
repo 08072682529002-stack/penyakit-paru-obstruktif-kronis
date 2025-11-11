@@ -227,7 +227,7 @@ with col3:
 st.markdown("---")
 if st.button("🩺 Mulai Diagnosis Sekarang"):
     st.session_state["menu"] = "🩺 Diagnosis PPOK"
-    st.switch_page("🩺 Diagnosis PPOK")
+    st.experimental_rerun()
 
 
 elif menu == "🩺 Diagnosis PPOK":
