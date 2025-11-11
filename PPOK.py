@@ -191,43 +191,61 @@ def combine_mass(m1, m2):
     return {h: (val / denominator) for h, val in new_mass.items()}
 
 # ---------------- Pages ----------------
-if menu == "🏠 Dashboard":
-    st.markdown('<div class="main-title">Selamat Datang di Sistem Pakar Diagnosis Penyakit Paru Obstruktif Kronis</div>', unsafe_allow_html=True)
-    st.markdown('<div class="sub-text">Sistem ini membantu mendiagnosis <b>Penyakit Paru Obstruktif Kronis (PPOK)</b> berdasarkan gejala pengguna menggunakan metode <b>Dempster-Shafer</b>.</div>', unsafe_allow_html=True)
+import streamlit as st
 
-    st.markdown('### 💡 Fitur Utama:</h4>', unsafe_allow_html=True)
-    st.markdown(
-        """
-        <ul class="feature-list">
-            <li>Form input pengguna & gejala interaktif</li>
-            <li>Proses diagnosis otomatis menggunakan teori bukti</li>
-            <li>Tingkat keyakinan hasil ditampilkan dalam persentase</li>
-            <li>Saran kesehatan dan pencegahan</li>
-        </ul>
-        """,
-        unsafe_allow_html=True,
+# Sidebar
+menu = st.sidebar.radio("Navigasi", ["🏠 Dashboard", "🩺 Diagnosis PPOK", "ℹ️ Tentang Aplikasi"])
+
+if menu == "🏠 Dashboard":
+    st.markdown("## Selamat Datang di Sistem Pakar Diagnosis PPOK")
+    st.write(
+        "Sistem ini membantu mendiagnosis **Penyakit Paru Obstruktif Kronis (PPOK)** "
+        "berdasarkan gejala yang dialami pengguna menggunakan metode **Dempster-Shafer**."
     )
-    st.markdown("---")
-    st.markdown("### Apa itu PPOK?")
+
+    st.markdown("### ✨ Fitur Utama:")
     st.markdown("""
-        Penyakit Paru Obstruktif Kronis (PPOK) adalah penyakit paru jangka panjang yang menyebabkan hambatan aliran udara dan kesulitan bernapas. PPOK biasanya disebabkan oleh **merokok**, polusi udara, atau paparan bahan kimia berbahaya dalam waktu lama. Penyakit ini bersifat **kronis dan progresif**, sehingga deteksi dini sangat penting untuk mencegah kerusakan paru yang lebih parah.
+    - Form input pengguna & gejala interaktif  
+    - Proses diagnosis otomatis menggunakan teori bukti  
+    - Tingkat keyakinan hasil ditampilkan dalam persentase  
+    - Saran kesehatan dan pencegahan
     """)
 
-# Tips pencegahan
-st.markdown("### Tips Pencegahan:")
-col1, col2, col3 = st.columns(3)
-with col1:
-    st.markdown("🚭 **Berhenti Merokok**\n\nLangkah paling efektif mencegah PPOK.")
-with col2:
-    st.markdown("😷 **Hindari Polusi Udara**\n\nGunakan masker di area berasap atau berdebu.")
-with col3:
-    st.markdown("🏃 **Jaga Kesehatan Paru**\n\nLakukan olahraga ringan dan konsumsi makanan bergizi.")
+    # Penjelasan tambahan tentang PPOK
+    st.markdown("---")
+    st.markdown("### 🫁 Apa itu PPOK?")
+    st.write("""
+    **Penyakit Paru Obstruktif Kronis (PPOK)** adalah penyakit paru jangka panjang yang menyebabkan
+    hambatan aliran udara dan kesulitan bernapas.  
+    Penyebab utama PPOK adalah **merokok**, paparan polusi udara, dan bahan kimia berbahaya.
+    Penyakit ini bersifat **kronis dan progresif**, artinya gejala dapat memburuk seiring waktu
+    bila tidak ditangani dengan baik.
+    """)
 
-# Tombol langsung ke diagnosis
-st.markdown("---")
-if st.button("🩺 Mulai Diagnosis Sekarang"):
-    st.session_state["menu"] = "🩺 Diagnosis PPOK"
-    st.experimental_rerun()
+    # Tips Pencegahan
+    st.markdown("### 💡 Tips Pencegahan:")
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        st.markdown("🚭 **Berhenti Merokok**\n\nLangkah paling efektif mencegah PPOK.")
+    with col2:
+        st.markdown("😷 **Hindari Polusi Udara**\n\nGunakan masker di area berasap atau berdebu.")
+    with col3:
+        st.markdown("🏃 **Jaga Kesehatan Paru**\n\nLakukan olahraga ringan dan konsumsi makanan bergizi.")
+
+    st.markdown("---")
+    # Tombol navigasi manual
+    if st.button("🩺 Mulai Diagnosis Sekarang"):
+        st.session_state.menu = "🩺 Diagnosis PPOK"
+        st.success("Silakan klik menu '🩺 Diagnosis PPOK' di sidebar untuk melanjutkan diagnosis.")
+
+elif menu == "🩺 Diagnosis PPOK":
+    st.markdown("## 🩺 Halaman Diagnosis PPOK")
+    st.write("Form diagnosis akan ditampilkan di sini...")
+
+elif menu == "ℹ️ Tentang Aplikasi":
+    st.markdown("## ℹ️ Tentang Aplikasi")
+    st.write("Aplikasi ini dibuat untuk membantu pengguna mendiagnosis PPOK secara dini.")
+
 
 
 elif menu == "🩺 Diagnosis PPOK":
