@@ -79,6 +79,55 @@ def combine_mass(m1, m2):
 # Header kotak
 st.markdown("""
 <style>
+.header-container {
+    position: relative;
+    height: 200px;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+}
+
+.header-background {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-image: url('https://www.shutterstock.com/image-photo/man-patients-respiratory-lung-diseases-600nw-2478601217.jpg');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.2;
+    z-index: 1;
+}
+
+.header-text {
+    position: relative;
+    z-index: 2;
+    padding: 30px;
+    text-align: center;
+    color: #003366;
+}
+
+.header-text h2 {
+    margin-bottom: 10px;
+    font-size: 28px;
+}
+
+.header-text p {
+    font-size: 16px;
+    color: #333;
+}
+</style>
+
+<div class="header-container">
+    <div class="header-background"></div>
+    <div class="header-text">
+        <h2>🫁 Sistem Pakar Diagnosis Penyakit Paru Obstruktif Kronis</h2>
+        <p>Akurat • Informatif</p>
+    </div>
+</div>
+""", unsafe_allow_html=True)
+st.markdown("""
+<style>
 .header-banner {
     background-image: url('https://www.shutterstock.com/image-photo/man-patients-respiratory-lung-diseases-600nw-2478601217.jpg');
     background-size: contain;
