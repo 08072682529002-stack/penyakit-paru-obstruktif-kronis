@@ -191,11 +191,6 @@ def combine_mass(m1, m2):
     return {h: (val / denominator) for h, val in new_mass.items()}
 
 # ---------------- Pages ----------------
-import streamlit as st
-
-# Sidebar
-menu = st.sidebar.radio("Navigasi", ["🏠 Dashboard", "🩺 Diagnosis PPOK", "ℹ️ Tentang Aplikasi"])
-
 if menu == "🏠 Dashboard":
     st.markdown("## Selamat Datang di Sistem Pakar Diagnosis PPOK")
     st.write(
