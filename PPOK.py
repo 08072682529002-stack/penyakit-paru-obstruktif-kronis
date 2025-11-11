@@ -198,7 +198,7 @@ if menu == "🏠 Dashboard":
         "berdasarkan gejala yang dialami pengguna menggunakan metode **Dempster-Shafer**."
     )
 
-    st.markdown("### ✨ Fitur Utama:")
+    st.markdown("### Fitur Utama:")
     st.markdown("""
     - Form input pengguna & gejala interaktif  
     - Proses diagnosis otomatis menggunakan teori bukti  
@@ -208,7 +208,7 @@ if menu == "🏠 Dashboard":
 
     # Penjelasan tambahan tentang PPOK
     st.markdown("---")
-    st.markdown("### 🫁 Apa itu PPOK?")
+    st.markdown("### Apa itu PPOK?")
     st.write("""
     **Penyakit Paru Obstruktif Kronis (PPOK)** adalah penyakit paru jangka panjang yang menyebabkan
     hambatan aliran udara dan kesulitan bernapas.  
@@ -218,7 +218,7 @@ if menu == "🏠 Dashboard":
     """)
 
     # Tips Pencegahan
-    st.markdown("### 💡 Tips Pencegahan:")
+    st.markdown("### Tips Pencegahan:")
     col1, col2, col3 = st.columns(3)
     with col1:
         st.markdown("🚭 **Berhenti Merokok**\n\nLangkah paling efektif mencegah PPOK.")
