@@ -240,6 +240,11 @@ if menu == "🏠 Dashboard":
     Penyakit ini bersifat **kronis dan progresif**, artinya gejala dapat memburuk seiring waktu 
     bila tidak ditangani dengan baik.
     """)
+    # Tambah gambar ke halaman Tentang Aplikasi
+    st.image("https://my.clevelandclinic.org/-/scassets/images/org/health/articles/8709-copd.jpg", 
+         caption="Ciri-ciri PPOK meliputi hilangnya elastisitas, saluran napas meradang dan menyempit, alveoli membesar dan rusak, serta lendir kental.", 
+         use_column_width=True)
+
 
     st.markdown("### Tips Pencegahan:")
     col1, col2, col3 = st.columns(3)
