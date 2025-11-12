@@ -305,7 +305,15 @@ elif menu == "🩺 Diagnosis PPOK":
             st.metric("Ketidaktahuan (Theta)", f"{belief_theta*100:.2f}%")
             st.progress(belief_theta)
 
-            st.info(f" Nama: {nama} | Umur: {umur} tahun n/ Gejala: " + ", ".join([symptom_names[c] for c in selected]) n/ Waktu: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+            st.info(
+    f"""
+    👤 **Nama:** {nama}  
+    🎂 **Umur:** {umur} tahun  
+    🩺 **Gejala:** {", ".join([symptom_names[c] for c in selected])}  
+    🕒 **Waktu:** {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
+    """
+)
+
 
             if belief_ppok >= 0.625:
                 st.success("🟢 Indikasi PPOK tinggi — segera konsultasikan ke dokter spesialis paru.")
