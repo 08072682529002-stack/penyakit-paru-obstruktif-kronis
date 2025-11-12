@@ -110,7 +110,7 @@ knowledge_base = {
 }
 
 symptom_names = {
-    'G01': 'Batuk berdahak > 3 bulan
+    'G01': 'Batuk berdahak > 3 bulan',
     'G02': 'Batuk kronis > 3 bulan',
     'G03': 'Usia > 45 tahun',
     'G04': 'Sesak saat aktivitas berat',
