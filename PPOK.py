@@ -2,353 +2,148 @@
 # coding: utf-8
 
 import streamlit as st
+import numpy as np
+import matplotlib.pyplot as plt
 from datetime import datetime
+from io import BytesIO
+from reportlab.lib.pagesizes import A4
+from reportlab.pdfgen import canvas
 
-# Page Configuration
-st.set_page_config(page_title="Sistem Pakar PPOK", page_icon="🫁", layout="wide")
+# Judul dan Header
+st.set_page_config(page_title="Sistem Pakar PPOK", page_icon="🫁", layout="centered")
 
-import streamlit as st
-
-# Sidebar
 st.markdown("""
 <style>
-/* Sidebar area */
-[data-testid="stSidebar"] {
-    background-color: #e8f5f2; /* warna hijau lembut */
-    padding: 2rem 1.5rem;
-    width: 270px !important;
+/* --- MODE GELAP / TERANG --- */
+body {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+[data-testid="stAppViewContainer"] {
+    background-color: #f6fcf9;
+}
+@media (prefers-color-scheme: dark) {
+    [data-testid="stAppViewContainer"] {
+        background-color: #0c1c17 !important;
+        color: #e8f5f2 !important;
+    }
+    [data-testid="stSidebar"] {
+        background-color: #153d33 !important;
+    }
 }
 
-/* Logo dan judul */
-.sidebar-title {
-    text-align: center;
-    font-weight: 700;
-    font-size: 18px;
-    color: #0f5132;
-    margin-top: 0.5rem;
-    margin-bottom: 1rem;
+/* --- ANIMASI HALUS --- */
+.result-card {
+    animation: fadeInUp 0.7s ease-in-out;
 }
-
-.sidebar-logo {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
-    background: radial-gradient(circle, #8fd3c8 0%, #4ca98a 100%);
-}
-
-/* Navigasi radio button */
-[data-testid="stSidebar"] [role="radiogroup"] {
-    margin-top: 1rem;
-}
-
-[data-testid="stSidebar"] label {
-    font-size: 15px;
-    font-weight: 500;
-    color: #084c61;
-    padding: 6px 10px;
-    border-radius: 10px;
-    margin-bottom: 6px;
-    transition: all 0.2s ease-in-out;
-}
-
-[data-testid="stSidebar"] label:hover {
-    background-color: #d9f0ea;
-    color: #05668d;
-    transform: translateX(5px);
-}
-
-[data-testid="stSidebar"] div[role="radiogroup"] > label[data-baseweb="radio"]:has(input:checked) {
-    background-color: #b5e5d6 !important;
-    font-weight: 600 !important;
-    color: #063c32 !important;
-}
-
-/* Footer text */
-.sidebar-footer {
-    font-size: 12px;
-    color: #49796b;
-    text-align: center;
-    margin-top: 2rem;
-    border-top: 1px solid #aac7b4;
-    padding-top: 1rem;
+@keyframes fadeInUp {
+    from {opacity: 0; transform: translateY(15px);}
+    to {opacity: 1; transform: translateY(0);}
 }
 </style>
 """, unsafe_allow_html=True)
 
+# Judul Utama
+st.title("🫁 Sistem Pakar Diagnosis PPOK (Penyakit Paru Obstruktif Kronis)")
+st.markdown("Gunakan aplikasi ini untuk membantu menganalisis kemungkinan PPOK berdasarkan gejala yang dialami.")
 
-# Sidebar
-with st.sidebar:
-    st.markdown('<div class="sidebar-logo"></div>', unsafe_allow_html=True)
-    st.markdown('<div class="sidebar-title">Sistem Pakar<br>Penyakit Paru Obstruktif Kronis</div>', unsafe_allow_html=True)
-    
-    menu = st.radio("Navigasi", ["🏠 Dashboard", "🩺 Diagnosis PPOK", "ℹ️ Tentang Aplikasi"])
-    
-    st.markdown("""
-    <div class="sidebar-footer">
-    © 2025 Sistem Pakar PPOK <br>by <b>Rahma Yuliana</b>
-    </div>
-    """, unsafe_allow_html=True)
+# --- Input Pengguna ---
+st.sidebar.header("🔍 Input Data Pasien")
+nama = st.sidebar.text_input("Nama Pasien")
+umur = st.sidebar.number_input("Umur Pasien (tahun)", min_value=1, max_value=120, value=40)
 
-# ---------------- Knowledge base (unchanged) ----------------
-knowledge_base = {
-    'G01': {'PPOK': 0.42, 'theta': 0.58},
-    'G02': {'PPOK': 0.42, 'theta': 0.58},
-    'G03': {'PPOK': 0.14, 'theta': 0.86},
-    'G04': {'PPOK': 0.20, 'theta': 0.80},
-    'G05': {'PPOK': 0.39, 'theta': 0.61},
-    'G06': {'PPOK': 0.58, 'theta': 0.42},
-    'G07': {'PPOK': 0.77, 'theta': 0.23},
-    'G08': {'PPOK': 0.96, 'theta': 0.04},
-    'G09': {'PPOK': 0.07, 'theta': 0.93},
-    'G10': {'PPOK': 0.105, 'theta': 0.895},
-    'G11': {'PPOK': 0.035, 'theta': 0.965},
-    'G12': {'PPOK': 0.035, 'theta': 0.965},
-    'G13': {'PPOK': 0.035, 'theta': 0.965},
-    'G14': {'PPOK': 0.035, 'theta': 0.965},
-    'G15': {'PPOK': 0.105, 'theta': 0.895},
-    'G16': {'PPOK': 0.105, 'theta': 0.895},
-    'G17': {'PPOK': 0.105, 'theta': 0.895},
-    'G18': {'PPOK': 0.035, 'theta': 0.965},
-}
-
+# Gejala dan Nilai Densitas (Contoh Sederhana)
 symptom_names = {
-    'G01': 'Batuk Berdahak > 3 bulan',
-    'G02': 'Batuk Kronis > 3 bulan',
-    'G03': 'Usia > 45 tahun',
-    'G04': 'Sesak saat aktivitas berat',
-    'G05': 'Sesak saat naik tangga',
-    'G06': 'Berjalan lambat karena sesak',
-    'G07': 'Sesak saat berjalan 100 meter',
-    'G08': 'Sesak saat mandi/pakai baju',
-    'G09': 'Nyeri di dada',
-    'G10': 'Mengi (suara tinggi saat napas)',
-    'G11': 'Merasa lelah',
-    'G12': 'Penurunan berat badan',
-    'G13': 'Aktivitas fisik berkurang',
-    'G14': 'Keluar masuk RS dengan keluhan sama',
-    'G15': 'Merokok > 15 tahun',
-    'G16': 'Kerja di tempat polusi tinggi',
-    'G17': 'Tinggal di daerah polusi tinggi',
-    'G18': 'Terpapar asap rokok (pasif)',
+    "batuk_kronis": "Batuk Kronis",
+    "sesak_napas": "Sesak Napas",
+    "dahak_berlebih": "Produksi Dahak Berlebih",
+    "riwayat_merokok": "Riwayat Merokok",
+    "kehilangan_berat_badan": "Penurunan Berat Badan"
+}
+selected_symptoms_list = st.multiselect("Pilih Gejala yang Dialami:", list(symptom_names.keys()), format_func=lambda x: symptom_names[x])
+
+# Nilai densitas dasar
+density_values = {
+    "batuk_kronis": 0.6,
+    "sesak_napas": 0.8,
+    "dahak_berlebih": 0.7,
+    "riwayat_merokok": 0.9,
+    "kehilangan_berat_badan": 0.5
 }
 
-possible_hypotheses = set(['PPOK', 'theta'])
+# --- Proses Diagnosis ---
+if st.button("🔬 Proses Diagnosis"):
+    if not selected_symptoms_list:
+        st.warning("⚠️ Silakan pilih minimal satu gejala untuk melanjutkan.")
+    else:
+        progress_text = "Menganalisis gejala pasien..."
+        progress_bar = st.progress(0, text=progress_text)
 
-# ---------------- Dempster-Shafer combine function ----------------
-def combine_mass(m1, m2):
-    new_mass = {}
-    conflict_k = 0.0
-    for h1_str, val1 in m1.items():
-        for h2_str, val2 in m2.items():
-            h1 = set(h1_str.split(',')) if h1_str != 'theta' else possible_hypotheses
-            h2 = set(h2_str.split(',')) if h2_str != 'theta' else possible_hypotheses
-            intersection = h1.intersection(h2)
-            if not intersection:
-                conflict_k += val1 * val2
-                continue
-            new_h_str = ','.join(sorted(list(intersection)))
-            if new_h_str == 'PPOK,theta':
-                new_h_str = 'theta'
-            new_mass[new_h_str] = new_mass.get(new_h_str, 0.0) + (val1 * val2)
-    if abs(conflict_k - 1.0) < 1e-12:
-        st.error("❌ Terjadi konflik total antar bukti.")
-        return {'theta': 1.0}
-    denominator = 1.0 - conflict_k
-    if denominator == 0:
-        # very high conflict — fallback to ignorance
-        return {'theta': 1.0}
-    return {h: (val / denominator) for h, val in new_mass.items()}
+        # Inisialisasi belief
+        belief_ppok = 0
+        belief_theta = 1
 
-# ---------------- Pages ----------------
-if menu == "🏠 Dashboard":
-    st.markdown("""
-    <style>
-    .header-container {
-        position: relative;
-        background-image: url('f6cabea2-146a-4560-ac1c-ed9ac8ea18f0.png');
-        background-size: cover;
-        background-position: center;
-        border-radius: 18px;
-        overflow: hidden;
-        height: 230px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        margin-bottom: 30px;
-        animation: fadeIn 1s ease-in-out;
-    }
+        # Proses Dempster-Shafer sederhana
+        for i, gejala in enumerate(selected_symptoms_list):
+            d = density_values[gejala]
+            belief_ppok = belief_ppok + (d * belief_theta)
+            belief_theta = belief_theta * (1 - d)
+            progress_bar.progress((i + 1) / len(selected_symptoms_list), text=progress_text)
 
-    .header-overlay {
-        position: absolute;
-        top: 0; left: 0;
-        width: 100%; height: 100%;
-        background: rgba(0, 40, 30, 0.45);  /* hijau gelap transparan */
-        backdrop-filter: blur(2px);
-        z-index: 1;
-    }
+        # Hasil akhir
+        st.success("✅ Analisis Selesai!")
 
-    .header-content {
-        position: relative;
-        z-index: 2;
-        text-align: center;
-        color: #ffffff;
-        padding-top: 60px;
-    }
-
-    .header-content h1 {
-        font-size: 2.2em;
-        font-weight: 800;
-        margin-bottom: 10px;
-        letter-spacing: 1px;
-        text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
-    }
-
-    .header-content p {
-        font-size: 1.05em;
-        font-weight: 400;
-        color: #e6f5ef;
-        margin-top: 0;
-    }
-
-    @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(-15px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
-    </style>
-
-    <div class="header-container">
-        <div class="header-overlay"></div>
-        <div class="header-content">
-            <h1>Selamat Datang di Sistem Pakar Diagnosis PPOK</h1>
-            <p>Diagnosa cerdas berbasis gejala untuk mendeteksi Penyakit Paru Obstruktif Kronis</p>
+        st.markdown(f"""
+        <div class='result-card'>
+        <h3>🧾 Hasil Diagnosis:</h3>
+        <ul>
+        <li><b>Nama Pasien:</b> {nama}</li>
+        <li><b>Umur:</b> {umur} tahun</li>
+        <li><b>Tingkat Keyakinan PPOK:</b> {belief_ppok*100:.2f}%</li>
+        <li><b>Tingkat Ketidaktahuan (Theta):</b> {belief_theta*100:.2f}%</li>
+        </ul>
         </div>
-    </div>
-""", unsafe_allow_html=True)
+        """, unsafe_allow_html=True)
 
-    st.write(
-        "Sistem ini membantu mendiagnosis **Penyakit Paru Obstruktif Kronis (PPOK)** "
-        "berdasarkan gejala yang dialami pengguna menggunakan metode **Dempster-Shafer**."
-    )
+        # --- Tambahan 2: Grafik Visual Keyakinan ---
+        fig, ax = plt.subplots()
+        ax.bar(["PPOK", "Ketidaktahuan"], [belief_ppok * 100, belief_theta * 100])
+        ax.set_ylabel("Persentase (%)")
+        ax.set_title("Visualisasi Keyakinan Diagnosis")
+        st.pyplot(fig)
 
-    st.markdown("### Fitur Utama:")
-    st.markdown("""
-    - Form input pengguna & gejala interaktif  
-    - Proses diagnosis otomatis 
-    - Tingkat keyakinan hasil ditampilkan dalam persentase  
-    - Saran kesehatan dan pencegahan
-    """)
+        # --- Tambahan 3: Unduh Hasil Diagnosis PDF ---
+        if st.button("📄 Unduh Hasil Diagnosis (PDF)"):
+            buffer = BytesIO()
+            c = canvas.Canvas(buffer, pagesize=A4)
+            c.setFont("Helvetica-Bold", 16)
+            c.drawString(180, 800, "HASIL DIAGNOSIS PPOK")
+            c.setFont("Helvetica", 12)
+            c.drawString(50, 770, f"Nama: {nama}")
+            c.drawString(50, 750, f"Umur: {umur} tahun")
+            c.drawString(50, 730, f"Tingkat Keyakinan PPOK: {belief_ppok*100:.2f}%")
+            c.drawString(50, 710, f"Ketidaktahuan (Theta): {belief_theta*100:.2f}%")
+            c.drawString(50, 690, "Gejala yang dipilih:")
+            y = 670
+            for g in selected_symptoms_list:
+                c.drawString(70, y, f"- {symptom_names[g]}")
+                y -= 20
+            c.drawString(50, y-10, f"Waktu Diagnosis: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+            c.showPage()
+            c.save()
+            buffer.seek(0)
+            st.download_button(
+                label="⬇️ Simpan Hasil Sebagai PDF",
+                data=buffer,
+                file_name=f"Hasil_Diagnosis_{nama}.pdf",
+                mime="application/pdf"
+            )
 
-    # Penjelasan tambahan tentang PPOK
-    st.markdown("---")
-    st.markdown("### Apa itu PPOK?")
-    st.write("""
-    **Penyakit Paru Obstruktif Kronis (PPOK)** adalah penyakit paru jangka panjang yang menyebabkan
-    hambatan aliran udara dan kesulitan bernapas.  
-    Penyebab utama PPOK adalah **merokok**, paparan polusi udara, dan bahan kimia berbahaya.
-    Penyakit ini bersifat **kronis dan progresif**, artinya gejala dapat memburuk seiring waktu
-    bila tidak ditangani dengan baik.
-    """)
+        # --- Tambahan 5: Pesan Penutup ---
+        st.markdown("---")
+        st.markdown("""
+        <div style="text-align:center; font-size:14px; color:#49796b;">
+        🌿 <i>“Menjaga paru-paru berarti menjaga hidup. Mulailah dari hari ini.”</i> 🌿
+        </div>
+        """, unsafe_allow_html=True)
 
-    # Tips Pencegahan
-    st.markdown("### Tips Pencegahan:")
-    col1, col2, col3 = st.columns(3)
-    with col1:
-        st.markdown("🚭 **Berhenti Merokok**\n\nLangkah paling efektif mencegah PPOK.")
-    with col2:
-        st.markdown("😷 **Hindari Polusi Udara**\n\nGunakan masker di area berasap atau berdebu.")
-    with col3:
-        st.markdown("🏃 **Jaga Kesehatan Paru**\n\nLakukan olahraga ringan dan konsumsi makanan bergizi.")
-
-    st.markdown("---")
-    # Tombol navigasi manual
-    if st.button("🩺 Mulai Diagnosis Sekarang"):
-        st.session_state.menu = "🩺 Diagnosis PPOK"
-        st.success("Silakan klik menu '🩺 Diagnosis PPOK' di sidebar untuk melanjutkan diagnosis.")
-
-elif menu == "🩺 Diagnosis PPOK":
-    st.markdown("## Form Diagnosis PPOK")
-    st.markdown('<div class="sub-text">Isi data diri lalu pilih minimal 3 gejala untuk melakukan proses diagnosis.</div>', unsafe_allow_html=True)
-
-    col_left, col_right = st.columns([2, 1])
-    with col_left:
-        nama = st.text_input("Nama Lengkap")
-        # Display checkboxes in two columns
-        st.markdown("### Pilih Gejala yang Kamu Alami:")
-        selected_symptoms_map = {}
-        cols = st.columns(2)
-        items = list(symptom_names.items())
-        for i in range(0, len(items), 2):
-            code1, name1 = items[i]
-            with cols[0]:
-                selected_symptoms_map[code1] = st.checkbox(name1, key=code1)
-            if i + 1 < len(items):
-                code2, name2 = items[i + 1]
-                with cols[1]:
-                    selected_symptoms_map[code2] = st.checkbox(name2, key=code2)
-    with col_right:
-        umur = st.number_input("Umur", min_value=0, max_value=120, step=1)
-        st.markdown("### Info Singkat")
-        st.markdown("- Minimal tiga gejala untuk proses valid")
-        st.markdown("- Hasil bersifat indikatif, bukan diagnosis dokter")
-
-    if st.button("Proses Diagnosis"):
-        selected_symptoms_list = [code for code, sel in selected_symptoms_map.items() if sel]
-
-        if not nama or umur == 0:
-            st.warning("⚠️ Silakan isi nama dan umur terlebih dahulu.")
-        elif len(selected_symptoms_list) < 3:
-            st.warning("⚠️ Silakan pilih minimal tiga gejala.")
-        else:
-            # Start combining masses
-            result_mass = knowledge_base[selected_symptoms_list[0]].copy()
-            for code in selected_symptoms_list[1:]:
-                result_mass = combine_mass(result_mass, knowledge_base[code])
-
-            belief_ppok = result_mass.get('PPOK', 0.0)
-            belief_theta = result_mass.get('theta', 0.0)
-
-            st.markdown('<div class="result-card">', unsafe_allow_html=True)
-            st.metric("Tingkat Keyakinan PPOK", f"{belief_ppok*100:.2f}%")
-            st.progress(belief_ppok)
-            st.metric("Ketidaktahuan (Theta)", f"{belief_theta*100:.2f}%")
-            st.progress(belief_theta)
-            st.markdown("</div>", unsafe_allow_html=True)
-
-            st.markdown("### Detail Diagnosis")
-            st.info(f"👤 Nama: {nama} | Umur: {umur} tahun")
-            st.info("🩺 Gejala: " + ", ".join([symptom_names[c] for c in selected_symptoms_list]))
-            st.info(f"🕒 Waktu: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
-
-            if belief_ppok >= 0.625:
-                st.success("🟢 Indikasi PPOK tinggi — segera konsultasikan ke dokter spesialis paru.")
-                st.markdown(
-                    """
-                    #### Saran:
-                    - Berhenti merokok dan hindari polusi udara  
-                    - Lakukan latihan pernapasan ringan & olah raga teratur  
-                    - Konsultasikan ke dokter paru untuk pemeriksaan lanjutan  
-                    """
-                )
-            else:
-                st.info("🛡️ Indikasi PPOK rendah atau tidak cukup bukti.")
-                st.markdown(
-                    """
-                    #### Saran Pencegahan:
-                    - Hindari paparan asap rokok & polusi  
-                    - Jaga kebugaran dan konsumsi makanan bergizi  
-                    - Periksa ke fasilitas kesehatan jika gejala berlanjut  
-                    """
-                )
-
-elif menu == "ℹ️ Tentang Aplikasi":
-    st.markdown('<div class="main-title">Tentang Sistem Pakar PPOK</div>', unsafe_allow_html=True)
-    st.markdown(
-        """
-        Aplikasi ini dirancang untuk membantu deteksi dini Penyakit Paru Obstruktif Kronis (PPOK)
-        menggunakan metode Dempster-Shafer. Hasil yang ditampilkan adalah indikatif dan tidak
-        menggantikan diagnosis langsung dari tenaga medis profesional.
-        """
-    )
-    st.markdown("**Dibangun dengan**: Python & Streamlit oleh Rahma Yuliana")
 
