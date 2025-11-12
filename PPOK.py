@@ -256,7 +256,7 @@ if menu == "🏠 Dashboard":
         st.success("Silakan klik menu '🩺 Diagnosis PPOK' di sidebar untuk melanjutkan diagnosis.")
 
 elif menu == "🩺 Diagnosis PPOK":
-    st.markdown("## Form Diagnosis PPOK")
+    st.markdown("## Formulir Diagnosis PPOK")
     st.markdown('<div class="sub-text">Isi data diri lalu pilih minimal 3 gejala untuk melakukan proses diagnosis.</div>', unsafe_allow_html=True)
 
     col_left, col_right = st.columns([2, 1])
