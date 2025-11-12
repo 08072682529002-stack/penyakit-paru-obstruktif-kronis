@@ -307,10 +307,10 @@ elif menu == "🩺 Diagnosis PPOK":
 
             st.info(
     f"""
-    👤 **Nama:** {nama}  
-    🎂 **Umur:** {umur} tahun  
-    🩺 **Gejala:** {", ".join([symptom_names[c] for c in selected])}  
-    🕒 **Waktu:** {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
+    **Nama:** {nama}  
+    **Umur:** {umur} tahun  
+    **Gejala yang Dialami:** {", ".join([symptom_names[c] for c in selected])}  
+    **Waktu Diagnosis:** {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
     """
 )
 
