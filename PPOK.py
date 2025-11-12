@@ -333,4 +333,4 @@ elif menu == "ℹ️ Tentang Aplikasi":
     menggunakan metode **Dempster-Shafer**.  
     Hasil yang ditampilkan bersifat **indikatif** dan tidak menggantikan diagnosis medis profesional.
     """)
-    st.markdown("**Dibangun dengan:** Python & Streamlit — oleh **Rahma Yuliana** 🫁")
+    st.markdown("**Dibangun dengan:** Python & Streamlit — oleh **Rahma Yuliana**")
