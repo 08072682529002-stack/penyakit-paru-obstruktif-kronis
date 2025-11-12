@@ -314,7 +314,6 @@ elif menu == "🩺 Diagnosis PPOK":
     """
 )
 
-
             if belief_ppok >= 0.625:
                 st.success("🟢 Indikasi PPOK tinggi — segera konsultasikan ke dokter spesialis paru.")
                 st.markdown("""
