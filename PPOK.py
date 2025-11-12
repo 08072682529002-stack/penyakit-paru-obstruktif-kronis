@@ -12,7 +12,7 @@ st.markdown("""
 <style>
 /* Sidebar area */
 [data-testid="stSidebar"] {
-    background-color: #e8f5f2; /* warna hijau lembut */
+    background-color: #f2e7f4; /* warna hijau lembut */
     padding: 2rem 1.5rem;
     width: 270px !important;
 }
@@ -162,7 +162,7 @@ if menu == "🏠 Dashboard":
     <style>
     .header-container {
         position: relative;
-        background-image: url('f6cabea2-146a-4560-ac1c-ed9ac8ea18f0.png');
+        background-image: url('https://akcdn.detik.net.id/visual/2019/10/03/c33549d5-78a2-494d-ad14-7c1ed37c36bb_169.jpeg?w=1200');
         background-size: cover;
         background-position: center;
         border-radius: 18px;
