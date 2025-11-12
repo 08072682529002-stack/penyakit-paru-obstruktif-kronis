@@ -6,8 +6,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 from datetime import datetime
 from io import BytesIO
-from reportlab.lib.pagesizes import A4
-from reportlab.pdfgen import canvas
 
 # --- Konfigurasi Awal ---
 st.set_page_config(page_title="Sistem Pakar PPOK", page_icon="🫁", layout="centered")
@@ -58,7 +56,7 @@ if menu == "🏠 Beranda":
 
     ---
     🔹 **Gunakan menu di kiri** untuk memulai diagnosis  
-    🔹 **Unduh hasil diagnosis** dalam bentuk PDF  
+    🔹 **Unduh hasil diagnosis** dalam bentuk laporan TXT  
     🔹 **Lihat grafik keyakinan** PPOK secara visual  
     ---
     """)
@@ -135,32 +133,33 @@ elif menu == "🧪 Diagnosis PPOK":
             ax.set_title("Visualisasi Keyakinan Diagnosis")
             st.pyplot(fig)
 
-            # --- Unduh PDF ---
-            if st.button("📄 Unduh Hasil Diagnosis (PDF)"):
-                buffer = BytesIO()
-                c = canvas.Canvas(buffer, pagesize=A4)
-                c.setFont("Helvetica-Bold", 16)
-                c.drawString(180, 800, "HASIL DIAGNOSIS PPOK")
-                c.setFont("Helvetica", 12)
-                c.drawString(50, 770, f"Nama: {nama}")
-                c.drawString(50, 750, f"Umur: {umur} tahun")
-                c.drawString(50, 730, f"Tingkat Keyakinan PPOK: {belief_ppok*100:.2f}%")
-                c.drawString(50, 710, f"Ketidaktahuan (Theta): {belief_theta*100:.2f}%")
-                c.drawString(50, 690, "Gejala yang dipilih:")
-                y = 670
-                for g in selected_symptoms_list:
-                    c.drawString(70, y, f"- {symptom_names[g]}")
-                    y -= 20
-                c.drawString(50, y-10, f"Waktu Diagnosis: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
-                c.showPage()
-                c.save()
-                buffer.seek(0)
-                st.download_button(
-                    label="⬇️ Simpan Hasil Sebagai PDF",
-                    data=buffer,
-                    file_name=f"Hasil_Diagnosis_{nama}.pdf",
-                    mime="application/pdf"
-                )
+            # --- Unduh Laporan TXT (tanpa install library) ---
+            hasil_text = f"""
+HASIL DIAGNOSIS PPOK
+======================
+Nama Pasien : {nama}
+Umur        : {umur} tahun
+----------------------
+Tingkat Keyakinan PPOK : {belief_ppok*100:.2f}%
+Tingkat Ketidaktahuan  : {belief_theta*100:.2f}%
+----------------------
+Gejala yang Dipilih:
+{chr(10).join(['- ' + symptom_names[g] for g in selected_symptoms_list])}
+----------------------
+Waktu Diagnosis: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
+======================
+Pesan: Menjaga paru-paru berarti menjaga hidup. 🌿
+"""
+
+            buffer = BytesIO()
+            buffer.write(hasil_text.encode("utf-8"))
+            buffer.seek(0)
+            st.download_button(
+                label="⬇️ Unduh Hasil Diagnosis (.txt)",
+                data=buffer,
+                file_name=f"Hasil_Diagnosis_{nama}.txt",
+                mime="text/plain"
+            )
 
             # --- Pesan Penutup ---
             st.markdown("---")
@@ -179,7 +178,7 @@ elif menu == "📘 Panduan Penggunaan":
     2. Masukkan nama dan umur pasien.  
     3. Centang gejala-gejala yang sesuai.  
     4. Klik **Proses Diagnosis** untuk mendapatkan hasil.  
-    5. Lihat grafik hasil dan unduh PDF jika diperlukan.  
+    5. Lihat grafik hasil dan unduh laporan jika diperlukan.  
     """)
 
 # -------------------- HALAMAN TENTANG --------------------
