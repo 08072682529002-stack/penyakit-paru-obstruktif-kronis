@@ -214,7 +214,6 @@ if menu == "🏠 Dashboard":
         <div class="header-overlay"></div>
         <div class="header-content">
             <h1>Selamat Datang di Sistem Pakar Diagnosis PPOK</h1>
-            <p>Diagnosa cerdas berbasis gejala untuk mendeteksi Penyakit Paru Obstruktif Kronis</p>
         </div>
     </div>
     """, unsafe_allow_html=True)
