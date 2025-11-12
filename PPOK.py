@@ -12,7 +12,7 @@ st.markdown("""
 <style>
 /* Sidebar area */
 [data-testid="stSidebar"] {
-    background-color: #f2e7f4; /* warna hijau lembut */
+    background-color: #e8f5f2; /* warna hijau lembut */
     padding: 2rem 1.5rem;
     width: 270px !important;
 }
