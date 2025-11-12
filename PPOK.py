@@ -110,14 +110,14 @@ knowledge_base = {
 }
 
 symptom_names = {
-    'G01': 'Batuk Berdahak > 3 bulan',
-    'G02': 'Batuk Kronis > 3 bulan',
+    'G01': 'Batuk berdahak > 3 bulan
+    'G02': 'Batuk kronis > 3 bulan',
     'G03': 'Usia > 45 tahun',
     'G04': 'Sesak saat aktivitas berat',
     'G05': 'Sesak saat naik tangga',
     'G06': 'Berjalan lambat karena sesak',
-    'G07': 'Sesak saat berjalan 100 meter',
-    'G08': 'Sesak saat mandi/pakai baju',
+    'G07': 'Mulai sesak saat berjalan 100 meter',
+    'G08': 'Sesak saat mandi atau saat berpakaian',
     'G09': 'Nyeri di dada',
     'G10': 'Mengi (suara tinggi saat napas)',
     'G11': 'Merasa lelah',
